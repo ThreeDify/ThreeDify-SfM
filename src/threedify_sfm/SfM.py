@@ -16,6 +16,12 @@ class SfM:
     def __init__(self, dataset: DataSet):
         self.dataset = dataset
 
+    def extract_cameras(self):
+        """
+        Extract camera data for the images in the dataset
+        """
+        logger.info("Extracting camera data from dataset.")
+
     def extract_features(self):
         """
         Extracts features for the images in the dataset
@@ -88,6 +94,7 @@ class SfM:
         """
         logger.info("Running SFM pipeline.")
 
+        self.extract_cameras()
         self.extract_features()
         self.match_features()
 

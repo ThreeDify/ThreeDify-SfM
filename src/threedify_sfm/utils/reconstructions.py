@@ -1,9 +1,11 @@
 import logging
+from typing import List
 from datetime import datetime
 
 import requests
 
 from threedify_sfm.constants import API_BASE_URL
+from threedify_sfm.models.Reconstruction import Reconstruction
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +13,7 @@ logger = logging.getLogger(__name__)
 RECONSTRUCTIONS_API_URL = "{}/reconstructions".format(API_BASE_URL)
 
 
-def fetch_reconstructions(limit: int = 10):
+def fetch_reconstructions(limit: int = 10) -> List[Reconstruction]:
     """
     Fetch reconstruction data.
 
@@ -36,7 +38,7 @@ def fetch_reconstructions(limit: int = 10):
         )
 
         # TODO: Add limits as request param when API supports.
-        return reconstructions[0:limit]
+        return [Reconstruction.parse(recon) for recon in reconstructions[0:limit]]
     except ValueError as err:
         logger.error("Error occurred while fetching reconstructions: %s", err)
 

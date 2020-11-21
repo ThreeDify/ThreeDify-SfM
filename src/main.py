@@ -15,8 +15,8 @@ def main():
     for reconstruction in reconstructions:
         logger.info(
             "Running SfM for reconstruction: %s (%s)",
-            reconstruction.get("id"),
-            reconstruction.get("name"),
+            reconstruction.id,
+            reconstruction.name,
         )
 
         logger.info("Creating dataset for reconstruction.")
