@@ -4,12 +4,9 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
-requirements = []
+requirements = ["python-dotenv==0.15.0", "requests==2.25.0"]
 
-dev_requirements = [
-    "black==20.8b1",
-    "pylint==2.6.0"
-]
+dev_requirements = ["black==20.8b1", "pylint==2.6.0"]
 
 setup(
     name="threedify-sfm",

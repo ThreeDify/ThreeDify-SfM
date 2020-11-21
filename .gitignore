@@ -6,3 +6,7 @@ build/
 *.egg*/
 __pycache__/
 *.py[cod]
+
+data/
+
+.env
