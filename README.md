@@ -12,7 +12,8 @@ ThreeDify is a online platform where you can upload images and create a 3D recon
 
 | Variable                      | Description                                      |
 | ----------------------------- | ------------------------------------------------ |
-| BASE_URL                      | API base url e.g. http://localhost               |
+| API_BASE_URL                  | API base url e.g. http://localhost               |
+| SFM_IMPLEMENTATION            | SfM implementation to use. (OPENSFM|THREEDIFY)   |
 
 # Setup
 1. Install `python-3.8` and `pip`.
@@ -28,10 +29,28 @@ $ pip install -e .[dev]
 $ cp .env.example .env
 ```
 
+4. Setup OpenSfM. [Docs](https://www.opensfm.org/docs/building.html)
+
 ## Run
 
 ```bash
 $ python src/main.py
+```
+
+## Run with Docker
+
+1. Setup Docker.
+
+2. Build image.
+
+```
+$ docker build --target=main -t threedify_sfm .
+```
+
+3. Run
+
+```
+$ docker run --env-file=.env threedify_sfm
 ```
 
 ## Lint
@@ -46,4 +65,11 @@ Fix format.
 
 ```bash
 $ black src
+```
+
+Check lint and format errors with docker.
+
+```bash
+$ docker build --target=lint -t threedify_sfm_lint .
+$ docker run threedify_sfm_lint
 ```

@@ -17,20 +17,11 @@ jobs:
       # Checks-out repository under $GITHUB_WORKSPACE, so job can access it
       - uses: actions/checkout@v2
 
-      # Setup python
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8.6
+      # Build Image
+      - name: Build Docker Image
+        run: docker build --target=lint -t threedify_sfm_lint .
+      
+      # Run Lint Checks
+      - name: Run Lint Checks
+        run: docker run threedify_sfm_lint
 
-      # Setup environment
-      - name: Setup environment
-        run: pip install -e .[dev]
-
-      # Run linter
-      - name: Run lint
-        run: pylint src
-
-      # Run code formatter
-      - name: Run code format
-        run: black --check --diff src/.

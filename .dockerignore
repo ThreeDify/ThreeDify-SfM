@@ -1,0 +1,13 @@
+.vscode/
+.venv/
+
+dist/
+build/
+*.egg*/
+*.py[cod]
+
+data/
+
+.env
+**/*.pyc
+**/__pycache__

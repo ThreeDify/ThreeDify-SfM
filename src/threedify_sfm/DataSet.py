@@ -27,6 +27,15 @@ class DataSet:
         """
         return self.image_paths
 
+    def data_path(self) -> str:
+        """
+        Get the path to directory of the dataset.
+        """
+        return os.path.join(
+            DOWNLOAD_PATH,
+            "{}_{}".format(self.reconstruction.name, self.reconstruction.id),
+        )
+
     def image_path(self) -> str:
         """
         Get the path to directory of the images.
