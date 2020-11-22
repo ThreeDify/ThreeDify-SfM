@@ -44,7 +44,7 @@ $ python src/main.py
 2. Build image.
 
 ```
-$ docker build -t threedify_sfm .
+$ docker build --target=main -t threedify_sfm .
 ```
 
 3. Run
@@ -65,4 +65,11 @@ Fix format.
 
 ```bash
 $ black src
+```
+
+Check lint and format errors with docker.
+
+```bash
+$ docker build --target=lint -t threedify_sfm_lint .
+$ docker run threedify_sfm_lint
 ```
