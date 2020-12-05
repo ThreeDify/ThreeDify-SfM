@@ -15,7 +15,7 @@ class Reconstruction:
         """
         reconstruction = Reconstruction()
 
-        reconstruction.id = data.get("id")
+        reconstruction.id = int(data.get("id"))
         reconstruction.name = data.get("name")
         reconstruction.images = [Image.parse(img) for img in data.get("images")]
 
