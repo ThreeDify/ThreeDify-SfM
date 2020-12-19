@@ -1,3 +1,4 @@
+import os
 import logging
 
 from opensfm import dataset
@@ -23,10 +24,12 @@ class OpenSfM:
     Run structure from motion pipeline on given dataset.
     """
 
+    sub_folder: str
     dataset: dataset.DataSet
 
     def __init__(self, data: DataSet):
         self.dataset = dataset.DataSet(data.data_path())
+        self.sub_folder = "undistored"
 
     def run(self):
         """
@@ -53,7 +56,11 @@ class OpenSfM:
         mesh.run_dataset(self.dataset)
 
         logger.info("Undistoring images.")
-        undistort.run_dataset(self.dataset, None, 0, None, "undistored")
+        undistort.run_dataset(self.dataset, None, 0, None, self.sub_folder)
 
         logger.info("Computing depthmaps.")
-        compute_depthmaps.run_dataset(self.dataset, "undistored", False)
+        compute_depthmaps.run_dataset(self.dataset, self.sub_folder, False)
+
+        return os.path.join(
+            self.dataset.data_path, self.sub_folder, "depthmaps", "merged.ply"
+        )

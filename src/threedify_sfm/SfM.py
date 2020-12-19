@@ -82,11 +82,16 @@ class SfM:
         self.triangulate_view(view)
         self.bundle_adjustment()
 
-    def export_as_ply(self):
+    def export_as_ply(self) -> str:
         """
         Exports reconstruction as ply file.
+
+        Returns:
+        str: Path to reconstruction file.
         """
         logger.info("Exporting reconstruction as ply file.")
+
+        return ""
 
     def run(self):
         """
@@ -109,4 +114,4 @@ class SfM:
         for view in views:
             self.add_view(view)
 
-        self.export_as_ply()
+        return self.export_as_ply()
