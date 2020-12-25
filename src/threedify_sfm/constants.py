@@ -16,3 +16,5 @@ API_HEADERS = {
     "x-threedify-app-id": os.environ["APP_ID"],
     "x-threedify-app-secret": os.environ["APP_SECRET"],
 }
+
+BATCH_SIZE = int(os.environ.get("BATCH_SIZE", 10))

@@ -4,7 +4,7 @@ import logging
 from threedify_sfm.SfM import SfM
 from threedify_sfm.DataSet import DataSet
 from threedify_sfm.utils.opensfm import OpenSfM
-from threedify_sfm.constants import SFM_IMPLEMENTATION
+from threedify_sfm.constants import SFM_IMPLEMENTATION, BATCH_SIZE
 from threedify_sfm.utils.reconstructions import (
     fetch_reconstructions,
     reconstruction_failed,
@@ -17,7 +17,7 @@ logger.setLevel(logging.DEBUG)
 
 
 def main():
-    reconstructions = fetch_reconstructions()
+    reconstructions = fetch_reconstructions(BATCH_SIZE)
 
     for reconstruction in reconstructions:
         try:
