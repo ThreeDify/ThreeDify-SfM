@@ -14,6 +14,8 @@ ThreeDify is a online platform where you can upload images and create a 3D recon
 | ----------------------------- | ------------------------------------------------ |
 | API_BASE_URL                  | API base url e.g. http://localhost               |
 | SFM_IMPLEMENTATION            | SfM implementation to use. (OPENSFM/THREEDIFY)   |
+| APP_ID                        | App ID for ThreeDify api.                        |
+| APP_SECRET                    | App secret for ThreeDify api.                    |
 
 # Setup
 1. Install `python-3.8` and `pip`.
