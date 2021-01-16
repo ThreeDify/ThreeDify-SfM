@@ -1,0 +1,26 @@
+name: Threedify Staging
+
+on:
+  schedule:
+    # Run every 12 hours.
+    - cron: '0 0,12 * * *'
+
+jobs:
+  # Run the batch process.
+  batch:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    environment: STAG
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Run Batch Process
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          SFM_IMPLEMENTATION: ${{ secrets.SFM_IMPLEMENTATION }}
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          BATCH_SIZE: ${{ secrets.BATCH_SIZE }}
+          SFM_IMAGE_VERSION: ${{ secrets.SFM_IMAGE_VERSION }}
+        run: docker run --env API_BASE_URL --env SFM_IMPLEMENTATION --env APP_ID --env APP_SECRET --env BATCH_SIZE ghcr.io/threedify/threedify_sfm:$SFM_IMAGE_VERSION
