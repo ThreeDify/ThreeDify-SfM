@@ -4,7 +4,7 @@ import logging
 import requests
 
 from threedify_sfm.models.Image import Image
-from threedify_sfm.constants import API_BASE_URL
+from threedify_sfm.constants import API_BASE_URL, API_HEADERS
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -20,7 +20,7 @@ def download(image: Image, path):
     download_url = "{}/{}".format(IMAGE_BASE_URL, filename)
 
     logger.info("Downloading image: %s", download_url)
-    response = requests.get(download_url, stream=True)
+    response = requests.get(download_url, stream=True, headers=API_HEADERS)
 
     if response.status_code == 200:
         download_file = os.path.join(path, filename)

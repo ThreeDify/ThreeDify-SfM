@@ -4,7 +4,7 @@ from typing import List
 
 import requests
 
-from threedify_sfm.constants import API_BASE_URL
+from threedify_sfm.constants import API_BASE_URL, API_HEADERS
 from threedify_sfm.models.Reconstruction import Reconstruction
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,9 @@ def fetch_reconstructions(limit: int = 10) -> List[Reconstruction]:
 
     try:
         logger.info("Fetching reconstructions.")
-        response = requests.put(RECONSTRUCTIONS_API_URL, params=params)
+        response = requests.put(
+            RECONSTRUCTIONS_API_URL, params=params, headers=API_HEADERS
+        )
         if response.status_code == 200:
             reconstructions = response.json()
             logger.info("Fetched %d reconstructions.", len(reconstructions))
@@ -55,7 +57,9 @@ def reconstruction_failed(reconstruction: Reconstruction):
     """
     try:
         logger.info("Reseting reconstruction: %d", reconstruction.id)
-        response = requests.put(RECONSTRUCTIONS_FAILED_URL.format(reconstruction.id))
+        response = requests.put(
+            RECONSTRUCTIONS_FAILED_URL.format(reconstruction.id), headers=API_HEADERS
+        )
         if response.status_code == 200:
             logger.info("Reconstrucion %d reset completed.", reconstruction.id)
         else:
@@ -80,7 +84,9 @@ def reconstruction_success(reconstruction: Reconstruction, file_path: str):
             "Uploading reconstruction output (%s) for: %d", file_path, reconstruction.id
         )
         response = requests.put(
-            RECONSTRUCTIONS_SUCCESS_URL.format(reconstruction.id), files=files
+            RECONSTRUCTIONS_SUCCESS_URL.format(reconstruction.id),
+            files=files,
+            headers=API_HEADERS,
         )
         if response.status_code == 200:
             logger.info(
