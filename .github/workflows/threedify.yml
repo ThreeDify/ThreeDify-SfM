@@ -1,6 +1,7 @@
 name: Threedify
 
 on:
+  workflow_dispatch:
   schedule:
     # Run every 12 hours.
     - cron: '0 0,12 * * *'
